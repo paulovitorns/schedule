@@ -1,7 +1,9 @@
-package br.com.paulosales.schedule;
+package br.com.paulosales.schedule.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.paulosales.schedule.R;
 
 public class MainActivity extends AppCompatActivity {
 
