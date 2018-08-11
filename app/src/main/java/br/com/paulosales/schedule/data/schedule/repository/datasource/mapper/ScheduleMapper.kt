@@ -13,3 +13,12 @@ fun ScheduleEntity.toSchedule(): Schedule = Schedule(
         notificationShouldVibrate = this.shouldVibrate,
         notificationShouldPlaySound = this.shouldPlaySound
 )
+
+fun Schedule.toEntity(): ScheduleEntity = ScheduleEntity(
+        title = this.scheduleTitle,
+        message = this.scheduleMessage,
+        datetime = this.scheduleDate.time,
+        shouldHaveNotification = this.scheduleHaveNotification,
+        shouldVibrate = this.notificationShouldVibrate,
+        shouldPlaySound = this.notificationShouldPlaySound
+)

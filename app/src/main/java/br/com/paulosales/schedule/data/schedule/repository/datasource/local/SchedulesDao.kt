@@ -6,16 +6,16 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import br.com.paulosales.schedule.data.schedule.repository.datasource.ScheduleEntity
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface SchedulesDao {
 
     @Query("SELECT * FROM schedule")
-    fun fetchSchedules(): Flowable<List<ScheduleEntity>>
+    fun fetchSchedules(): Single<List<ScheduleEntity>>
 
     @Query("SELECT * FROM schedule WHERE schedule_id = :scheduleId")
-    fun fetchSchedule(scheduleId: String): Flowable<ScheduleEntity?>
+    fun fetchSchedule(scheduleId: String): Single<ScheduleEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSchedule(schedule: ScheduleEntity)
@@ -27,8 +27,8 @@ interface SchedulesDao {
     fun updateDisplayed(displayed: Boolean, scheduleId: String)
 
     @Query("DELETE FROM schedule WHERE schedule_id = :scheduleId")
-    fun deleteTask(scheduleId: String): Int
+    fun deleteSchedule(scheduleId: String): Int
 
     @Query("DELETE FROM schedule")
-    fun deleteTasks()
+    fun deleteSchedules()
 }
