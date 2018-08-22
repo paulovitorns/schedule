@@ -49,6 +49,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     implementation 'com.airbnb.android:lottie:2.6.0-beta19'
+    implementation "androidx.core:core-ktx:0.3"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

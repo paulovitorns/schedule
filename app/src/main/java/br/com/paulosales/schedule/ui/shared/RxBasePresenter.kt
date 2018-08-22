@@ -26,5 +26,5 @@ abstract class RxBasePresenter<T>(private val schedulerProvider: SchedulerProvid
         subscriptions.clear()
     }
 
-    fun addSubscription(disposable: Disposable) = subscriptions.add(disposable)
+    private fun addSubscription(disposable: Disposable) = subscriptions.add(disposable)
 }
