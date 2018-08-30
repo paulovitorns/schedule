@@ -1,10 +1,10 @@
 package br.com.paulosales.schedule.ui.shared
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import dagger.android.support.DaggerAppCompatActivity
 
-abstract class BaseView<T : BaseContract.Presenter> : AppCompatActivity(), BaseContract.View {
+abstract class BaseView<T : BaseContract.Presenter> : DaggerAppCompatActivity(), BaseContract.View {
     protected abstract var presenter: T
 
     fun setTitle(title: String, showHome: Boolean) {

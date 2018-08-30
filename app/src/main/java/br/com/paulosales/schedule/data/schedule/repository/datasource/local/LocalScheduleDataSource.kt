@@ -9,8 +9,11 @@ import br.com.paulosales.schedule.domain.shared.FailedToUpdateScheduleException
 import br.com.paulosales.schedule.domain.shared.SchedulesNotFoundException
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalScheduleDataSource(
+@Singleton
+class LocalScheduleDataSource @Inject constructor(
         private val schedulesDao: SchedulesDao
 ) : ScheduleDataSource {
 

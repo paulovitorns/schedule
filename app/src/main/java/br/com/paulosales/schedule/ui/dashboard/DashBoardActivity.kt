@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.widget.toast
 import br.com.paulosales.schedule.R
-import br.com.paulosales.schedule.application.AppSchedulerProvider
+import br.com.paulosales.schedule.application.di.annotation.ActivityScope
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.ui.addschedule.AddScheduleActivity
 import br.com.paulosales.schedule.ui.shared.BaseView
 import kotlinx.android.synthetic.main.activity_dash_board.fab
+import javax.inject.Inject
 
+@ActivityScope
 class DashBoardActivity : BaseView<DashboardContract.Presenter>(),
         DashboardContract.View {
 
+    @Inject
     override lateinit var presenter: DashboardContract.Presenter
     private var schedules: ArrayList<Schedule> = ArrayList()
 
@@ -22,8 +25,6 @@ class DashBoardActivity : BaseView<DashboardContract.Presenter>(),
         setContentView(R.layout.activity_dash_board)
 
         setTitle("Your Schedules", false)
-
-        presenter = DashBoardPresenter(AppSchedulerProvider(), applicationContext)
 
         fab.setOnClickListener {
             navigateToAddSchedule()

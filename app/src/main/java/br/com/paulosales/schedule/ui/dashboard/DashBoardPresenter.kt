@@ -1,40 +1,21 @@
 package br.com.paulosales.schedule.ui.dashboard
 
-import android.content.Context
 import br.com.paulosales.schedule.application.SchedulerProvider
-import br.com.paulosales.schedule.data.database.ScheduleDataBase
-import br.com.paulosales.schedule.data.schedule.repository.DefaultScheduleRepository
-import br.com.paulosales.schedule.data.schedule.repository.datasource.ScheduleDataSource
-import br.com.paulosales.schedule.data.schedule.repository.datasource.local.LocalScheduleDataSource
+import br.com.paulosales.schedule.application.di.annotation.ActivityScope
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
-import br.com.paulosales.schedule.domain.schedule.repository.ScheduleRepository
 import br.com.paulosales.schedule.domain.schedule.usecase.GetSchedules
 import br.com.paulosales.schedule.domain.shared.SchedulesNotFoundException
 import br.com.paulosales.schedule.ui.shared.BaseContract
 import br.com.paulosales.schedule.ui.shared.RxBasePresenter
 import io.reactivex.observers.DisposableSingleObserver
+import javax.inject.Inject
 
-class DashBoardPresenter(
+@ActivityScope
+class DashBoardPresenter @Inject constructor(
         schedulerProvider: SchedulerProvider,
-        context: Context
+        private val getSchedules: GetSchedules
 ) : RxBasePresenter<DashboardContract.View>(schedulerProvider),
         DashboardContract.Presenter {
-
-    private val getSchedules: GetSchedules
-
-    init {
-        // Instance for DB
-        val scheduleDB = ScheduleDataBase.getInstace(context)
-
-        // Instance for local data source
-        val localDataSource: ScheduleDataSource = LocalScheduleDataSource(scheduleDB.scheduleDao())
-
-        // Instance for repository
-        val scheduleRepository: ScheduleRepository = DefaultScheduleRepository(localDataSource)
-
-        // Instance for use case
-        getSchedules = GetSchedules(scheduleRepository)
-    }
 
     override var view: DashboardContract.View? = null
 

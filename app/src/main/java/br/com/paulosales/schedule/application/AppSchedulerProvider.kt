@@ -3,8 +3,9 @@ package br.com.paulosales.schedule.application
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class AppSchedulerProvider : SchedulerProvider {
+class AppSchedulerProvider @Inject constructor() : SchedulerProvider {
 
     override fun ui(): Scheduler {
         return AndroidSchedulers.mainThread()

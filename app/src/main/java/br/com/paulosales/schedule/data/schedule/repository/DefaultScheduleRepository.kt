@@ -5,8 +5,11 @@ import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.domain.schedule.repository.ScheduleRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultScheduleRepository(
+@Singleton
+class DefaultScheduleRepository @Inject constructor(
         private val localDataSource: ScheduleDataSource
 ) : ScheduleRepository {
     override fun schedules(): Single<List<Schedule>> =
