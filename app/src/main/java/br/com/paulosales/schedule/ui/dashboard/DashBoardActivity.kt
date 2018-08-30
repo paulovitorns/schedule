@@ -6,13 +6,7 @@ import android.widget.Toast
 import androidx.core.widget.toast
 import br.com.paulosales.schedule.R
 import br.com.paulosales.schedule.application.AppSchedulerProvider
-import br.com.paulosales.schedule.data.database.ScheduleDataBase
-import br.com.paulosales.schedule.data.schedule.repository.DefaultScheduleRepository
-import br.com.paulosales.schedule.data.schedule.repository.datasource.ScheduleDataSource
-import br.com.paulosales.schedule.data.schedule.repository.datasource.local.LocalScheduleDataSource
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
-import br.com.paulosales.schedule.domain.schedule.repository.ScheduleRepository
-import br.com.paulosales.schedule.domain.schedule.usecase.GetSchedules
 import br.com.paulosales.schedule.ui.addschedule.AddScheduleActivity
 import br.com.paulosales.schedule.ui.shared.BaseView
 import kotlinx.android.synthetic.main.activity_dash_board.fab
@@ -29,19 +23,7 @@ class DashBoardActivity : BaseView<DashboardContract.Presenter>(),
 
         setTitle("Your Schedules", false)
 
-        // Instance for DB
-        val scheduleDB = ScheduleDataBase.getInstace(this)
-
-        // Instance for local data source
-        val localDataSource: ScheduleDataSource = LocalScheduleDataSource(scheduleDB.scheduleDao())
-
-        // Instance for repository
-        val scheduleRepository: ScheduleRepository = DefaultScheduleRepository(localDataSource)
-
-        // Instance for use case
-        val getSchedules = GetSchedules(scheduleRepository)
-
-        presenter = DashBoardPresenter(AppSchedulerProvider(), getSchedules)
+        presenter = DashBoardPresenter(AppSchedulerProvider(), applicationContext)
 
         fab.setOnClickListener {
             navigateToAddSchedule()
