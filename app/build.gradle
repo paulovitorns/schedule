@@ -27,6 +27,7 @@ android {
 
 ext {
     roomVersion = '1.1.1'
+    daggerVersion = '2.16'
 }
 
 dependencies {
@@ -50,6 +51,13 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:2.6.0-beta19'
     implementation "androidx.core:core-ktx:0.3"
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
