@@ -5,6 +5,7 @@ import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.shared.toDate
 
 fun ScheduleEntity.toSchedule(): Schedule = Schedule(
+        scheduleID = this.id,
         scheduleTitle = this.title,
         scheduleMessage = this.message,
         isSchedule = !this.alreadyDisplayed,
@@ -15,6 +16,7 @@ fun ScheduleEntity.toSchedule(): Schedule = Schedule(
 )
 
 fun Schedule.toEntity(): ScheduleEntity = ScheduleEntity(
+        id = this.scheduleID,
         title = this.scheduleTitle,
         message = this.scheduleMessage,
         datetime = this.scheduleDate.time,

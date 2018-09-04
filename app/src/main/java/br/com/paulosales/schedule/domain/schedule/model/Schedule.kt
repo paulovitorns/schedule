@@ -3,6 +3,7 @@ package br.com.paulosales.schedule.domain.schedule.model
 import java.util.Date
 
 data class Schedule(
+        val scheduleID: Long,
         val scheduleTitle: String,
         val scheduleMessage: String,
         val isSchedule: Boolean,

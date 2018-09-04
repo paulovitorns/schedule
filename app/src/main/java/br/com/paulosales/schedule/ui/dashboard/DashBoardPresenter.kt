@@ -7,7 +7,6 @@ import br.com.paulosales.schedule.domain.schedule.usecase.GetSchedules
 import br.com.paulosales.schedule.domain.shared.SchedulesNotFoundException
 import br.com.paulosales.schedule.ui.shared.BaseContract
 import br.com.paulosales.schedule.ui.shared.RxBasePresenter
-import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 @ActivityScope
@@ -25,20 +24,26 @@ class DashBoardPresenter @Inject constructor(
     }
 
     override fun loadSchedules() {
-        executeSingle(getSchedules.execute(), ScheduleObserver())
+        executeFlowable(
+                getSchedules.execute(),
+                onNext = { schedules ->
+                    updateSchedules(schedules)
+                },
+                onError = { error ->
+                    errorOnFetchSchedules(error)
+                }
+        )
     }
 
-    inner class ScheduleObserver: DisposableSingleObserver<List<Schedule>>() {
-        override fun onSuccess(t: List<Schedule>) {
-            view?.showSchedules(t)
-        }
+    private fun updateSchedules(t: List<Schedule>) {
+        view?.showSchedules(t)
+    }
 
-        override fun onError(e: Throwable) {
-            if (e is SchedulesNotFoundException) {
-                view?.showEmptyState()
-            } else {
-                view?.showErrorMessage("An error occurs!")
-            }
+    private fun errorOnFetchSchedules(e: Throwable) {
+        if (e is SchedulesNotFoundException) {
+            view?.showEmptyState()
+        } else {
+            view?.showErrorMessage("An error occurs!")
         }
     }
 }

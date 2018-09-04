@@ -4,6 +4,7 @@ import br.com.paulosales.schedule.data.schedule.repository.datasource.ScheduleDa
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.domain.schedule.repository.ScheduleRepository
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 class DefaultScheduleRepository @Inject constructor(
         private val localDataSource: ScheduleDataSource
 ) : ScheduleRepository {
-    override fun schedules(): Single<List<Schedule>> =
+    override fun schedules(): Flowable<List<Schedule>> =
             localDataSource.fetchSchedules()
 
     override fun schedule(scheduleId: String): Single<Schedule> =

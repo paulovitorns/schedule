@@ -2,10 +2,11 @@ package br.com.paulosales.schedule.data.schedule.repository.datasource
 
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 interface ScheduleDataSource {
-    fun fetchSchedules(): Single<List<Schedule>>
+    fun fetchSchedules(): Flowable<List<Schedule>>
 
     fun fetchSchedule(scheduleId: String): Single<Schedule>
 

@@ -6,13 +6,14 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import br.com.paulosales.schedule.data.schedule.repository.datasource.ScheduleEntity
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 @Dao
 interface SchedulesDao {
 
     @Query("SELECT * FROM schedule")
-    fun fetchSchedules(): Single<List<ScheduleEntity>>
+    fun fetchSchedules(): Flowable<List<ScheduleEntity>>
 
     @Query("SELECT * FROM schedule WHERE schedule_id = :scheduleId")
     fun fetchSchedule(scheduleId: String): Single<ScheduleEntity?>

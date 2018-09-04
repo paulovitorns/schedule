@@ -8,6 +8,7 @@ import br.com.paulosales.schedule.domain.shared.FailedToDeleteScheduleException
 import br.com.paulosales.schedule.domain.shared.FailedToUpdateScheduleException
 import br.com.paulosales.schedule.domain.shared.SchedulesNotFoundException
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,7 +18,7 @@ class LocalScheduleDataSource @Inject constructor(
         private val schedulesDao: SchedulesDao
 ) : ScheduleDataSource {
 
-    override fun fetchSchedules(): Single<List<Schedule>> =
+    override fun fetchSchedules(): Flowable<List<Schedule>> =
             schedulesDao.fetchSchedules().map { mapper ->
                 if (mapper.isNotEmpty()) {
                     mapper.map {
