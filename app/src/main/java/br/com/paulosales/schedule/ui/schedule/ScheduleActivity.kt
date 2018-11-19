@@ -5,10 +5,7 @@ import br.com.paulosales.schedule.R
 import br.com.paulosales.schedule.application.AppSchedulerProvider
 import br.com.paulosales.schedule.ui.shared.BaseView
 
-class ScheduleActivity : BaseView<ScheduleContract.Presenter>(),
-        ScheduleContract.View {
-
-    override lateinit var presenter: ScheduleContract.Presenter
+class ScheduleActivity : BaseView<SchedulePresenter>(), ScheduleUi {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

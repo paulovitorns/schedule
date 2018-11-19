@@ -3,9 +3,14 @@ package br.com.paulosales.schedule.ui.shared
 import android.os.Bundle
 import android.view.MenuItem
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-abstract class BaseView<T : BaseContract.Presenter> : DaggerAppCompatActivity(), BaseContract.View {
-    protected abstract var presenter: T
+interface BaseUi
+
+abstract class BaseView<T : BasePresenter<BaseUi>> : DaggerAppCompatActivity(), BaseUi {
+
+    @Inject
+    protected lateinit var presenter: T
 
     fun setTitle(title: String, showHome: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(showHome)

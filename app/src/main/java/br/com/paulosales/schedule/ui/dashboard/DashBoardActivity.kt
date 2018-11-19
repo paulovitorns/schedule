@@ -10,15 +10,9 @@ import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.ui.addschedule.AddScheduleActivity
 import br.com.paulosales.schedule.ui.shared.BaseView
 import kotlinx.android.synthetic.main.activity_dash_board.fab
-import javax.inject.Inject
 
 @ActivityScope
-class DashBoardActivity : BaseView<DashboardContract.Presenter>(),
-        DashboardContract.View {
-
-    @Inject
-    override lateinit var presenter: DashboardContract.Presenter
-    private var schedules: ArrayList<Schedule> = ArrayList()
+class DashBoardActivity : BaseView<DashBoardPresenter>(), DashboardUI {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

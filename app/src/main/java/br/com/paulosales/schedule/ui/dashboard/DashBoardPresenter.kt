@@ -5,7 +5,7 @@ import br.com.paulosales.schedule.application.di.annotation.ActivityScope
 import br.com.paulosales.schedule.domain.schedule.model.Schedule
 import br.com.paulosales.schedule.domain.schedule.usecase.GetSchedules
 import br.com.paulosales.schedule.domain.shared.SchedulesNotFoundException
-import br.com.paulosales.schedule.ui.shared.BaseContract
+import br.com.paulosales.schedule.ui.shared.BaseUi
 import br.com.paulosales.schedule.ui.shared.RxBasePresenter
 import javax.inject.Inject
 
@@ -13,17 +13,11 @@ import javax.inject.Inject
 class DashBoardPresenter @Inject constructor(
         schedulerProvider: SchedulerProvider,
         private val getSchedules: GetSchedules
-) : RxBasePresenter<DashboardContract.View>(schedulerProvider),
-        DashboardContract.Presenter {
+) : RxBasePresenter<BaseUi>(schedulerProvider) {
 
-    override var view: DashboardContract.View? = null
+    private val view: DashboardUI? get() = baseUi()
 
-    override fun attachView(view: BaseContract.View) {
-        view as DashboardContract.View
-        this.view = view
-    }
-
-    override fun loadSchedules() {
+    fun loadSchedules() {
         executeFlowable(
                 getSchedules.execute(),
                 onNext = { schedules ->

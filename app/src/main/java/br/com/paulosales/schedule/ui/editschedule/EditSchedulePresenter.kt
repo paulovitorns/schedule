@@ -1,17 +1,14 @@
 package br.com.paulosales.schedule.ui.editschedule
 
 import br.com.paulosales.schedule.application.SchedulerProvider
-import br.com.paulosales.schedule.ui.shared.BaseContract
+import br.com.paulosales.schedule.ui.shared.BaseUi
 import br.com.paulosales.schedule.ui.shared.RxBasePresenter
+import javax.inject.Inject
 
-class EditSchedulePresenter(schedulerProvider: SchedulerProvider) :
-        RxBasePresenter<EditScheduleContract.View>(schedulerProvider),
-        EditScheduleContract.Presenter {
+class EditSchedulePresenter @Inject constructor(
+        schedulerProvider: SchedulerProvider
+) : RxBasePresenter<BaseUi>(schedulerProvider) {
 
-    override var view: EditScheduleContract.View? = null
+    private val view: EditScheduleUi? get() = baseUi()
 
-    override fun attachView(view: BaseContract.View) {
-        view as EditScheduleContract.View
-        this.view = view
-    }
 }

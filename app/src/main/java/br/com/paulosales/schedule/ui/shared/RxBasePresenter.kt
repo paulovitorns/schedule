@@ -7,8 +7,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 
-abstract class RxBasePresenter<T>(private val schedulerProvider: SchedulerProvider) :
-        BasePresenter<T>() {
+abstract class RxBasePresenter<T : BaseUi>(
+        private val schedulerProvider: SchedulerProvider
+) : BasePresenter<T>() {
 
     private val subscriptions: CompositeDisposable = CompositeDisposable()
 
